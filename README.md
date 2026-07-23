@@ -15,7 +15,7 @@
 algorithm-study
 │
 ├── week01
-│   ├── 문제 제목
+│   ├── swea_문제번호_문제이름
 │   │   ├── 지민.java
 │   │   ├── 효연.java
 │   │   └── 순일.java
@@ -29,13 +29,13 @@ algorithm-study
 
 ## 📝 파일명 규칙
 
-문제번호_문제이름
+swea_문제번호_문제이름
 
 예시
 
 ```
-27006_대칭찾기
-27005_산불수열
+swea_27006_대칭찾기
+swea_27005_산불수열
 ```
 
 개인 풀이 파일
@@ -65,13 +65,4 @@ git pull origin master
 git add .
 git commit -m "week01 문제번호 풀이"
 git push origin master
-```
-
----
-
-## 💬 Commit Message
-
-```
-week01 문제번호 풀이
-week02 문제번호 풀이
 ```
