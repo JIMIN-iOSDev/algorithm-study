@@ -27,23 +27,21 @@ algorithm-study
 
 ---
 
-## 📝 파일명 규칙
+## 📝 폴더 / 파일명 규칙
 
-swea_문제번호_문제이름
-
-예시
+폴더 : swea_문제번호_문제이름
 
 ```
 swea_27006_대칭찾기
 swea_27005_산불수열
 ```
 
-개인 풀이 파일
+개인 풀이 파일 : 개인 이름 영어로 작성
 
 ```
-지민.java
-효연.java
-순일.java
+Jimin.java
+Hyoyeon.java
+Sunil.java
 ```
 
 ---
@@ -63,6 +61,6 @@ git pull origin master
 
 ```bash
 git add .
-git commit -m "week01 문제번호 풀이"
+git commit -m "week01 문제번호"
 git push origin master
 ```
