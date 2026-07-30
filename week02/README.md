@@ -8,3 +8,7 @@
 | 1948 날짜계산기 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PnnU6AOsDFAUq) |
 | 1979 어디에단어가들어갈수있을까 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PuPq6AaQDFAUq) |
 | 1940 가랏!RC카! | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PjMgaALgDFAUq) |
+| 1961 숫자배열회전 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5Pq-OKAVYDFAUq) |
+| 1954 달팽이숫자 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PobmqAPoDFAUq) |
+| 2001 파리퇴치 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PzOCKAigDFAUq) |
+| 2005 파스칼의삼각형 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5P0-h6Ak4DFAUq) |
