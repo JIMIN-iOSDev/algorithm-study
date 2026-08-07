@@ -13,7 +13,7 @@ class Solution
 
 		for(int test_case = 1; test_case <= T; test_case++)
 		{
-            int m1 = sc.nextInt();
+      int m1 = sc.nextInt();
 			int d1 = sc.nextInt();
 			int m2 = sc.nextInt();
 			int d2 = sc.nextInt();
