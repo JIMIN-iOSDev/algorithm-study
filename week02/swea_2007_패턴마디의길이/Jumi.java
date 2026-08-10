@@ -21,7 +21,7 @@ class Solution
             for(int i = 1; i <= 10 ; i++) {
                 String same = S.substring(0,i);
                     
-                    if ( same.equals(S.substring(i , i*2))) {
+                    if (same.equals(S.substring(i , i*2)) && same.equals(S.substring(i*2 , i*3))) {
                         ans = i;
                         break;
                     }
