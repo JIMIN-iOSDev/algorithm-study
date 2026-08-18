@@ -27,7 +27,7 @@ import java.util.Scanner;
                     if(count % 10 == 0) {
                       System.out.println();
                     }
-            }     
+                }     
             }
                System.out.println();
 		}
