@@ -1,5 +1,4 @@
 
-
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -35,28 +34,23 @@ public class Hyoyeon {
 		for (int test_case = 1; test_case <= T; test_case++) {
 
 			int num = sc.nextInt();
-			int a= num;
+			int a = num;
 			int cnt = 0;
 			Set<Integer> set = new HashSet();
 			while (set.size() != 10) {
 				cnt += 1;
-				//a *= cnt;
-				num =a;
-				num*=cnt;
+				num = a;
+				num *= cnt;
 				while (num != 0) {
-					if(num<10) {
+					if (num < 10) {
 						set.add(num);
 					}
 					set.add(num % 10);
-					//System.out.println(set);
 					num /= 10;
 				}
 
-				
-
-				
 			}
-			System.out.println("#" + test_case + " " + a*cnt);
+			System.out.println("#" + test_case + " " + a * cnt);
 
 		}
 	}
