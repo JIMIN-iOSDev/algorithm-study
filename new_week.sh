@@ -3,10 +3,9 @@
 # algorithm-study 주차 폴더 자동 생성 스크립트
 #
 # 사용법:
-#   ./new_week.sh 01
-#   (week 번호를 인자로 넘기면 week01 폴더를 만들고,
-#    문제 6개를 순서대로 입력받아 swea_문제번호_문제이름 폴더와
-#    README.md(문제 링크 포함)를 생성합니다)
+#   ./new_week.sh 01        → week01 폴더 만들고 문제 6개 입력받음 (기본값)
+#   ./new_week.sh 01 4      → week01 폴더에 문제 4개만 추가로 입력받음
+#   (이미 week01/README.md가 있으면 덮어쓰지 않고 뒤에 이어붙입니다)
 # ------------------------------------------------------------
 
 set -e
@@ -17,19 +16,26 @@ else
   WEEK_NUM="$1"
 fi
 
+# 두 번째 인자로 문제 개수를 받음, 안 주면 기본 6개
+PROBLEM_COUNT="${2:-6}"
+
 WEEK_DIR="week${WEEK_NUM}"
 mkdir -p "$WEEK_DIR"
 
 WEEK_README="${WEEK_DIR}/README.md"
-echo "# Week ${WEEK_NUM}" > "$WEEK_README"
-echo "" >> "$WEEK_README"
-echo "| 문제 | 링크 |" >> "$WEEK_README"
-echo "|------|------|" >> "$WEEK_README"
 
-echo "총 6문제를 순서대로 입력해주세요."
+# README가 이미 있으면 그대로 두고(이어붙이기), 없으면 새로 헤더 생성
+if [ ! -f "$WEEK_README" ]; then
+  echo "# Week ${WEEK_NUM}" > "$WEEK_README"
+  echo "" >> "$WEEK_README"
+  echo "| 문제 | 링크 |" >> "$WEEK_README"
+  echo "|------|------|" >> "$WEEK_README"
+fi
+
+echo "총 ${PROBLEM_COUNT}문제를 순서대로 입력해주세요."
 echo ""
 
-for i in $(seq 1 6); do
+for i in $(seq 1 "$PROBLEM_COUNT"); do
   echo "----- 문제 ${i} -----"
   read -p "문제 번호 (예: 1945): " P_NUM
   read -p "문제 이름 (공백은 자동으로 _ 처리됩니다, 예: 간단한소인수분해): " P_NAME_RAW
