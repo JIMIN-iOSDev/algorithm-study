@@ -24,9 +24,9 @@ class Solution
             }
             
             for(int i = 0; i < N; i++) {
-				int k  = Math.abs(N/2 - i);
+				      int k  = Math.abs(N/2 - i);
                 for(int j = k ; j < N - k ; j ++) {
-                    sum += arr[i][j];
+                   sum += arr[i][j];
                                
                 }    
             }           
