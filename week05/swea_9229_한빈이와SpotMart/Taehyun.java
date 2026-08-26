@@ -22,7 +22,7 @@ class Solution
             }
             Collections.sort(list);
             
-            while(start_i < end_i){
+            while(start_i != end_i){
                 sum = list.get(start_i) + list.get(end_i);
                 if(sum<=M){
                     if(sum>sum_final){
