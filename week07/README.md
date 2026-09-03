@@ -3,7 +3,7 @@
 | 문제 | 링크 |
 |------|------|
 | 1220 Magnetic | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14hwZqABsCFAYD) |
-| GNS 1221 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14jJh6ACYCFAYD) |
+| 1221 GNS | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14jJh6ACYCFAYD) |
 | 1228 암호문1 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14w-rKAHACFAYD) |
 | 1229 암호문2 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14yIsqAHYCFAYD) |
 | 1230 암호문3 | [문제 링크](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14zIwqAHwCFAYD) |
