@@ -8,7 +8,7 @@ public class SWEA_1234 {
 	public static void main(String[] args) throws FileNotFoundException {
 		Scanner sc = new Scanner(new FileInputStream("data/input.txt"));
 		
-		for (int tc = 1; tc <= 9; tc++) {
+		for (int tc = 1; tc <= 10; tc++) {
 			sc.nextInt();
 			String str = sc.next();
 			StringBuilder sb = new StringBuilder(str);
