@@ -6,6 +6,11 @@
 #   ./new_week.sh 01        → week01 폴더 만들고 문제 6개 입력받음 (기본값)
 #   ./new_week.sh 01 4      → week01 폴더에 문제 4개만 추가로 입력받음
 #   (이미 week01/README.md가 있으면 덮어쓰지 않고 뒤에 이어붙입니다)
+#
+# 문제마다 플랫폼(SWEA / 프로그래머스)을 선택할 수 있습니다.
+#   - SWEA        : 폴더명 swea_{번호}_{이름}
+#   - 프로그래머스 : 폴더명 pgs_{번호}_{이름}
+#                   (번호는 URL의 lessons/{숫자} 값을 자동으로 사용합니다)
 # ------------------------------------------------------------
 
 set -e
@@ -37,25 +42,70 @@ echo ""
 
 for i in $(seq 1 "$PROBLEM_COUNT"); do
   echo "----- 문제 ${i} -----"
-  read -p "문제 번호 (예: 1945): " P_NUM
+  read -p "플랫폼 (s: SWEA, p: 프로그래머스) [s]: " PLATFORM
+  PLATFORM="${PLATFORM:-s}"
+
+  read -p "문제 링크: " P_URL_RAW
+
+  case "$PLATFORM" in
+    p|P)
+      PREFIX="pgs"
+      LABEL="프로그래머스"
+
+      # URL에서 lessons/{숫자} 값만 추출해서 깔끔한 링크로 재구성
+      # (?language=java 같은 쿼리 파라미터 제거)
+      PROB_ID=$(echo "$P_URL_RAW" | grep -o 'lessons/[0-9]*' | head -1 | cut -d'/' -f2)
+
+      if [ -n "$PROB_ID" ]; then
+        P_URL="https://school.programmers.co.kr/learn/courses/30/lessons/${PROB_ID}"
+      else
+        P_URL="$P_URL_RAW"
+      fi
+
+      # 프로그래머스는 lesson ID를 문제 번호 기본값으로 사용
+      DEFAULT_NUM="$PROB_ID"
+      ;;
+    *)
+      PREFIX="swea"
+      LABEL="SWEA"
+
+      # URL에서 contestProbId 값만 추출해서 깔끔한 링크로 재구성
+      # (문제 목록 페이지에서 복사하면 붙는 필터/정렬 파라미터를 전부 제거)
+      PROB_ID=$(echo "$P_URL_RAW" | grep -o 'contestProbId=[^&]*' | head -1 | cut -d'=' -f2)
+
+      if [ -n "$PROB_ID" ]; then
+        P_URL="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=${PROB_ID}"
+      else
+        # contestProbId를 못 찾으면 입력한 링크를 그대로 사용
+        P_URL="$P_URL_RAW"
+      fi
+
+      # SWEA는 번호가 URL에 없으므로 직접 입력받음
+      DEFAULT_NUM=""
+      ;;
+  esac
+
+  # 문제 번호 입력 (프로그래머스는 엔터만 치면 URL에서 추출한 값 사용)
+  while true; do
+    if [ -n "$DEFAULT_NUM" ]; then
+      read -p "문제 번호 [${DEFAULT_NUM}]: " P_NUM
+      P_NUM="${P_NUM:-$DEFAULT_NUM}"
+    else
+      read -p "문제 번호 (예: 1945): " P_NUM
+    fi
+
+    if [ -n "$P_NUM" ]; then
+      break
+    fi
+    echo "문제 번호는 비워둘 수 없습니다."
+  done
+
   read -p "문제 이름 (공백은 자동으로 _ 처리됩니다, 예: 간단한소인수분해): " P_NAME_RAW
-  read -p "문제 링크 (SWEA URL): " P_URL_RAW
 
-  # URL에서 contestProbId 값만 추출해서 깔끔한 링크로 재구성
-  # (문제 목록 페이지에서 복사하면 붙는 필터/정렬 파라미터를 전부 제거)
-  PROB_ID=$(echo "$P_URL_RAW" | grep -o 'contestProbId=[^&]*' | head -1 | cut -d'=' -f2)
+  # 공백, 슬래시 -> 언더스코어 치환 (슬래시는 경로가 깨지는 것을 방지)
+  P_NAME=$(echo "$P_NAME_RAW" | tr ' /' '__')
 
-  if [ -n "$PROB_ID" ]; then
-    P_URL="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=${PROB_ID}"
-  else
-    # contestProbId를 못 찾으면 입력한 링크를 그대로 사용
-    P_URL="$P_URL_RAW"
-  fi
-
-  # 공백 -> 언더스코어 치환
-  P_NAME=$(echo "$P_NAME_RAW" | tr ' ' '_')
-
-  FOLDER_NAME="swea_${P_NUM}_${P_NAME}"
+  FOLDER_NAME="${PREFIX}_${P_NUM}_${P_NAME}"
   FOLDER_PATH="${WEEK_DIR}/${FOLDER_NAME}"
 
   mkdir -p "$FOLDER_PATH"
@@ -64,11 +114,12 @@ for i in $(seq 1 "$PROBLEM_COUNT"); do
   cat > "${FOLDER_PATH}/README.md" <<EOF
 # ${P_NUM} - ${P_NAME_RAW}
 
+- 플랫폼: ${LABEL}
 - 문제 링크: ${P_URL}
 EOF
 
   # 주차 README에 링크 한 줄 추가
-  echo "| ${P_NUM} ${P_NAME_RAW} | [문제 링크](${P_URL}) |" >> "$WEEK_README"
+  echo "| [${LABEL}] ${P_NUM} ${P_NAME_RAW} | [문제 링크](${P_URL}) |" >> "$WEEK_README"
 
   echo "생성 완료: ${FOLDER_PATH}"
   echo ""
